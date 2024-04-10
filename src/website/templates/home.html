@@ -1,0 +1,17 @@
+{% extends "base.html" %} 
+{% block title %}Home{% endblock %} 
+{% block content%}
+    <h1>Upload Files</h1>
+    <form method="POST" enctype="multipart/form-data" style="margin-bottom: 30px;">
+        <input type="file", name="file-to-save">
+        <button type="submit" class="btn btn-primary">upload</button>
+    </form>
+
+    <ul class="list-group">
+        {% for file in files %}
+            <li class="list-group-item">{{ file.original_filename }}</li>
+        {% endfor %}
+    </ul>
+    
+
+{% endblock %}

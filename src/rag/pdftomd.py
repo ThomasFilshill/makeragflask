@@ -1,20 +1,21 @@
 import pdfminer.high_level
 import markdown
-# from config import Config
+from config import Config
 import os
 
 class PdfToMD():
 
-    pdf_path = 'data/pdf'
-    markdown_path = 'data/markdown'
+    pdf_path = Config.PDF_ROOT
+    markdown_path = Config.MARKDOWN_ROOT
 
     def convertPDFtoMD(self, fileName):
+        mdname = fileName.replace("pdf", "md")
 
         with open(f"{self.pdf_path}/{fileName}", "rb") as f:
             text = pdfminer.high_level.extract_text(f)
         markdown_text = markdown.markdown(text)
 
-        with open(f"{self.markdown_path}/{fileName}", 'w') as f:
+        with open(f"{self.markdown_path}/{mdname}", 'w') as f:
             f.write(markdown_text)
         
     def convertAllPDFtoMD(self):

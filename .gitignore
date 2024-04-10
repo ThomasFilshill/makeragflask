@@ -1,5 +1,8 @@
 
 data/
+chroma/
+src/rag/.env
+src/website/.env
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
