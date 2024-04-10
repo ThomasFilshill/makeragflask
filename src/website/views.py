@@ -45,5 +45,5 @@ def home():
 
         return(redirect(url_for('views.home')))
     
-    files = File.query.filter_by(user_id=current_user.id)
+    files = File.query.filter_by(user_id=current_user.id).all()
     return render_template("home.html", user=current_user, files=files)

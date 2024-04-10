@@ -1,17 +1,43 @@
-{% extends "base.html" %} 
-{% block title %}Home{% endblock %} 
-{% block content%}
-    <h1>Upload Files</h1>
-    <form method="POST" enctype="multipart/form-data" style="margin-bottom: 30px;">
-        <input type="file", name="file-to-save">
-        <button type="submit" class="btn btn-primary">upload</button>
-    </form>
-
-    <ul class="list-group">
-        {% for file in files %}
-            <li class="list-group-item">{{ file.original_filename }}</li>
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content%}
+<div class="d-flex vh-100 mt-3">
+  <div class="col">
+    <div class="bg-white shadow-sm p-3 w-100 m-0 mb-2" style="margin: 10px; border-radius: 10px; height: 80vh;">
+      <h3 style="font-size: 20px; margin: 0">Chatbot Files</h3>
+      <hr class="m-0 mb-2 mt-2"></hr>
+       {% if files %}
+       {% for file in files %}
+        <div class="list-group-item">{{ file.original_filename }}</div>
         {% endfor %}
-    </ul>
-    
+        {% else %}
+        <p>no files</p>
+
+        {% endif %}
+    </div>
+
+    <div class="bg-white shadow-sm pl-2 pr-2 pt-1" style="border-radius: 10px; height: 50px;">
+        <form
+        method="POST"
+        enctype="multipart/form-data"
+        style="margin-bottom: 30px; display: flex; justify-content: space-between;"
+      >
+        <input type="file" , name="file-to-save" class="mt-1"/>
+        <button type="submit" class="btn btn-primary">Add File</button>
+      </form>
+
+    </div>
+  </div>
+
+  <div class="col">
+    <div class="bg-white shadow-sm p-3 w-100 m-0 mb-2" style="margin: 10px; border-radius: 10px; height: 80vh;">
+        <h3 style="font-size: 20px; margin: 0">Test Chatbot</h3>
+        <hr class="m-0 mb-2 mt-2"></hr>
+
+      </div>
+      <div class="bg-white shadow-sm p-2" style="border-radius: 10px; height: 50px;">
+        <input type="text" style="width: 86%; height: 100%; border-radius: 10px; border: 1px solid gray">
+        <button class="btn btn-primary">Send</button>
+</div>
+  </div>
+</div>
 
 {% endblock %}

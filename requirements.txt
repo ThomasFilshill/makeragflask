@@ -4,10 +4,10 @@ markdown==3.6
 langchain==0.1.14
 langchain-openai==0.1.1
 unstructured==0.11.8
-python-dotenvpython-dotenv==1.0.1
-openaiopenai==1.16.2
+python-dotenv==1.0.1
+openai==1.16.2
 chromadb==0.4.24
-tiktokentiktoken==0.6.0
+tiktoken==0.6.0
 Flask-Login==0.6.3
 Flask-SQLAlchemy==3.1.1
 boto3==1.34.79
