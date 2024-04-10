@@ -1,49 +1,69 @@
 {% extends "base.html" %} {% block title %}Sign Up{% endblock %} {% block
     content %}
-    <form method="POST">
-      <h3 align="center">Sign Up</h3>
-      <div class="form-group">
-        <label for="email">Email Address</label>
-        <input
-          type="email"
-          class="form-control"
-          id="email"
-          name="email"
-          placeholder="Enter email"
-        />
+    <div class="d-flex vh-100 align-items-center">
+      <div class="col">
+        <form method="POST" class="w-75 p-4 bg-white shadow mb-5" style="border-radius: 20px;">
+          <h3 class="mb-4"><b>Sign up</b></h3>
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              name="email"
+              placeholder="Enter email"
+            />
+          </div>
+          <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="firstName"
+              name="firstName"
+              placeholder="Enter first name"
+            />
+          </div>
+          <div class="form-group">
+            <label for="password1">Password</label>
+            <input
+              type="password"
+              class="form-control"
+              id="password1"
+              name="password1"
+              placeholder="Enter password"
+            />
+          </div>
+          <div class="form-group">
+            <label for="password2">Re-enter password</label>
+            <input
+              type="password"
+              class="form-control"
+              id="password2"
+              name="password2"
+              placeholder="Confirm password"
+            />
+          </div>
+          <br />
+          <p style="color: gray; font-size: 13px;">By signing up you agree with our terms of service.</p>
+          
+        <button type="submit" class="btn btn-primary w-100 mb-3">Sign up</button>
+    
+          <p align="center">Already have an account? <a href="/login">Log in</a></p>
+        </form>
       </div>
-      <div class="form-group">
-        <label for="firstName">First Name</label>
-        <input
-          type="text"
-          class="form-control"
-          id="firstName"
-          name="firstName"
-          placeholder="Enter first name"
-        />
+      <div class="col">
+        <div style="display: flex; flex-direction: column; justify-content: space-between;" class="mb-5">
+        <p style="font-size: 100px; font-weight: bold; font-family:monospace; line-height :60%;">
+        makerag
+      </p>
+      <p style="font-size: 50px; font-weight: bold; font-family:monospace; line-height: 70%;">.com</p>
+      <br><br>
+      <p style="font-family: monospace;">Create an AI Chatbot with personalized information in seconds.</p>
       </div>
-      <div class="form-group">
-        <label for="password1">Password</label>
-        <input
-          type="password"
-          class="form-control"
-          id="password1"
-          name="password1"
-          placeholder="Enter password"
-        />
-      </div>
-      <div class="form-group">
-        <label for="password2">Re-enter password</label>
-        <input
-          type="password"
-          class="form-control"
-          id="password2"
-          name="password2"
-          placeholder="Confirm password"
-        />
-      </div>
-      <br />
-      <p>By signing up you agree with our terms of service.</p>
-      <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+    </div>
+    </div>
+
+
+      
     {% endblock %}

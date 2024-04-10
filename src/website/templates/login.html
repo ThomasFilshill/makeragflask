@@ -1,8 +1,10 @@
 {% extends "base.html" %} {% block title %}Login{% endblock %} {% block content %}
-    <form method="POST">
-      <h3 align="center">Login</h3>
+<div class="d-flex vh-100 align-items-center">
+  <div class="col">
+    <form method="POST" class="w-75 p-4 bg-white shadow mb-5" style="border-radius: 20px;">
+      <h3 class="mb-4"><b>Login</b></h3>
       <div class="form-group">
-        <label for="email">Email Address</label>
+        <label for="email" class="mb-1">Email Address</label>
         <input
           type="email"
           class="form-control"
@@ -12,7 +14,7 @@
         />
       </div>
       <div class="form-group">
-        <label for="password">Password</label>
+        <label for="password" class="mb-1">Password</label>
         <input
           type="password"
           class="form-control"
@@ -21,7 +23,30 @@
           placeholder="Enter password"
         />
       </div>
-      <br />
-      <button type="submit" class="btn btn-primary">Login</button>
+      <div style="display: flex; align-items: center; justify-content: space-between;" class="mb-3">
+        <div>
+          <input type="checkbox"><span> Remember me</span>
+    </div>
+    <div>
+      
+      <a class="mb-1" href="/forgotpass">Forgot password?</a>
+    </div>
+    </div>
+    <button type="submit" class="btn btn-primary w-100 mb-3">Login</button>
+
+      <p align="center">Don't have an account? <a href="/sign-up">Sign up</a></p>
     </form>
+  </div>
+  <div class="col">
+    <div style="display: flex; flex-direction: column; justify-content: space-between;" class="mb-5">
+    <p style="font-size: 100px; font-weight: bold; font-family:monospace; line-height :60%;">
+    makerag
+  </p>
+  <p style="font-size: 50px; font-weight: bold; font-family:monospace; line-height: 70%;">.com</p>
+  <br><br>
+  <p style="font-family: monospace;">Create an AI Chatbot with personalized information in seconds.</p>
+  </div>
+</div>
+</div>
+
     {% endblock %}
