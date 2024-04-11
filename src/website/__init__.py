@@ -4,6 +4,7 @@ from os import path
 import os
 from flask_login import LoginManager
 from dotenv import load_dotenv
+import boto3
 
 load_dotenv()
 secret_key = os.getenv('SECRET_KEY')
@@ -41,3 +42,13 @@ def create_app():
 def create_database(app):
     with app.app_context():
         db.create_all()
+
+AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY')
+AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_KEY')
+
+def get_bucket():
+    s3 = boto3.resource('s3', 
+        aws_access_key_id=AWS_ACCESS_KEY_ID,
+        aws_secret_access_key=AWS_SECRET_ACCESS_KEY)
+    
+    return s3
