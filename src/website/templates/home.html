@@ -4,10 +4,10 @@
     <div class="bg-white shadow-sm p-3 w-100 m-0 mb-2" style="margin: 10px; border-radius: 10px; height: 80vh;">
       <h3 style="font-size: 20px; margin: 0">Chatbot Files</h3>
       <hr class="m-0 mb-2 mt-2"></hr>
-       {% if files %}
-       {% for file in files %}
-        <div class="list-group-item">{{ file.original_filename }}</div>
-        {% endfor %}
+        {% if files %}
+          {% for file in files %}
+            <div class="list-group-item">{{ file.original_filename }}</div>
+          {% endfor %}
         {% else %}
         <p>no files</p>
 

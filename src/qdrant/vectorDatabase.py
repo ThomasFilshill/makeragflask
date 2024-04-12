@@ -1,6 +1,7 @@
 from qdrant_client import QdrantClient
 from qdrant.userDataMethods import PDFMethods
 from qdrant.config import Config
+from website import get_bucket
 
 class VectorDatabase():
     '''
@@ -19,7 +20,7 @@ class VectorDatabase():
     client.set_model("sentence-transformers/all-MiniLM-L6-v2")
     
 
-    def createDatabase(self, user_id):
+    def createDatabase(self, user_id, file_ids):
         '''handles the process of creating the database'''
         client = self.client
 
@@ -29,7 +30,7 @@ class VectorDatabase():
         )
 
         pdm = PDFMethods()
-        texts = pdm.convertAllPDFtoText()
+        texts = pdm.convertAllBucketPDFtoText(file_ids)
         split_texts = self.split_text(texts, self.chunk_size)
 
         self.embed(client, split_texts, user_id)

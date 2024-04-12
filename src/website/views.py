@@ -51,8 +51,10 @@ def home():
 @views.route('/createdb', methods=['GET','POST'])
 @login_required
 def create_vector_database():
+    files = File.query.filter_by(user_id=current_user.id).all()
+    file_ids = [file.filename for file in files]
     vdb = VectorDatabase()
-    vdb.createDatabase(current_user.id)
+    vdb.createDatabase(current_user.id, file_ids)
 
     return(redirect(url_for('views.home')))
 
@@ -67,9 +69,7 @@ def query_vector_db():
 
     context = vdb.searchDatabase(current_user.id, query_text)
     llm_response = querier.query(query_text, context)
-    print(llm_response)
 
-
-    files = File.query.filter_by(user_id=current_user.id).all() ### REMOVE THIS!!
-
+    files = File.query.filter_by(user_id=current_user.id).all() ### Do this some other way?
+    
     return render_template("home.html", user=current_user, files=files, llm_response=llm_response)
