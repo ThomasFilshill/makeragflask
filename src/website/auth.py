@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, flash, redirect, url_for
+from flask import Blueprint, render_template, request, flash, redirect, url_for, session
 from flask_login import login_user, login_required, logout_user, current_user
 from .models import User
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -17,6 +17,8 @@ def login():
             if check_password_hash(user.password, password):
                 flash('Login successful!', category='success')
                 login_user(user, remember=True)
+                if session.__contains__('llm_response'):
+                    session.pop('llm_response')
                 return redirect(url_for('views.home'))
             else:
                 flash('Incorrect password!', category='error')

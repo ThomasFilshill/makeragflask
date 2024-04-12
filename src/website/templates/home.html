@@ -6,7 +6,11 @@
       <hr class="m-0 mb-2 mt-2"></hr>
         {% if files %}
           {% for file in files %}
-            <div class="list-group-item">{{ file.original_filename }}</div>
+            <li class="list-group-item">{{ file.original_filename }}
+              <button type="button" class="close" onClick="deleteFile({{ file.id }})">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </li>
           {% endfor %}
         {% else %}
         <p>no files</p>

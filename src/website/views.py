@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash, session
+from flask import Blueprint, render_template, request, redirect, url_for, flash, session, jsonify
 from flask_login import login_required, current_user
 from .models import User, File
 import boto3
@@ -9,6 +9,7 @@ from . import get_bucket
 from dotenv import load_dotenv
 from qdrant.vectorDatabase import VectorDatabase
 from qdrant.llm import Query
+import json
 
 
 load_dotenv()
@@ -46,7 +47,8 @@ def home():
         return(redirect(url_for('views.home')))
     
     files = File.query.filter_by(user_id=current_user.id).all()
-    return render_template("home.html", user=current_user, files=files)
+    return render_template("home.html", user=current_user, files=files, llm_response=session.get('llm_response'))
+
 
 @views.route('/createdb', methods=['GET','POST'])
 @login_required
@@ -69,7 +71,22 @@ def query_vector_db():
 
     context = vdb.searchDatabase(current_user.id, query_text)
     llm_response = querier.query(query_text, context)
-
-    files = File.query.filter_by(user_id=current_user.id).all() ### Do this some other way?
+    session['llm_response'] = llm_response
     
-    return render_template("home.html", user=current_user, files=files, llm_response=llm_response)
+    return(redirect(url_for('views.home')))
+
+@views.route('/delete-file', methods=['POST'])
+def delete_file():  
+    file_json = json.loads(request.data)
+    print(file_json) 
+    file_id = file_json.get('id')
+    file = File.query.get(file_id)
+    if file:
+        if file.user_id == current_user.id:
+            db.session.delete(file)
+            db.session.commit()
+            bucket_name = 'makerag'
+            s3 = get_bucket()
+            s3.Object(bucket_name, file.filename).delete()
+
+    return jsonify({})
