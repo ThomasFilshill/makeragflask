@@ -21,7 +21,7 @@
     width: 100vw;
     height: 100vh;
     overflow: hidden;
-    background-color: #f7f7f7;
+    background-color: #F4FFFD;
     background-image: radial-gradient(rgb(215, 215, 215) 1px, transparent 0);
     background-size: 40px 40px;
     background-position: -19px -19px;
@@ -99,7 +99,7 @@
 
   <script>
     type='text/javascript'
-    src='{{ url_for("static", filename="index.js") }}'
+    src='{{ url_for("static", filename="home.js") }}'
   </script>
 
   {% block javascript %}
@@ -109,7 +109,7 @@
     method: "POST",
     body: JSON.stringify({ id: id }),
     }).then((_res) => {
-    window.location.href = "/";
+    window.location.href = "/home";
     });
     }
     </script>

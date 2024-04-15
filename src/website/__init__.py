@@ -25,6 +25,8 @@ def create_app():
     app.register_blueprint(views, url_prefix='/')
     app.register_blueprint(auth, url_prefix='/')
 
+    app.config['MAX_CONTENT_LENGTH'] = 100 * 1024 * 1024
+
     from .models import User, File
 
     create_database(app)
@@ -52,3 +54,4 @@ def get_bucket():
         aws_secret_access_key=AWS_SECRET_ACCESS_KEY)
     
     return s3
+

@@ -55,6 +55,10 @@ class PDFMethods():
         obj = s3.get_object(Bucket=bucket_name, Key=file_id)
         pdf_file=obj['Body'].read()
 
+        return self.convertPDFtoText(pdf_file)
+        
+    
+    def convertPDFtoText(self, pdf_file):
         reader = PdfReader(BytesIO(pdf_file))
 
         whole_text = ''

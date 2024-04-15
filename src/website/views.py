@@ -24,6 +24,10 @@ def allowed_file(file):
 views = Blueprint('views', __name__)
 
 @views.route('/', methods=['GET', 'POST'])
+def index():
+    return render_template("index.html")
+
+@views.route('/home', methods=['GET', 'POST'])
 @login_required
 def home():
     if request.method == 'POST':
@@ -46,8 +50,11 @@ def home():
 
         return(redirect(url_for('views.home')))
     
+    
     files = File.query.filter_by(user_id=current_user.id).all()
     return render_template("home.html", user=current_user, files=files, llm_response=session.get('llm_response'))
+
+    
 
 
 @views.route('/createdb', methods=['GET','POST'])
@@ -78,7 +85,6 @@ def query_vector_db():
 @views.route('/delete-file', methods=['POST'])
 def delete_file():  
     file_json = json.loads(request.data)
-    print(file_json) 
     file_id = file_json.get('id')
     file = File.query.get(file_id)
     if file:
@@ -90,3 +96,9 @@ def delete_file():
             s3.Object(bucket_name, file.filename).delete()
 
     return jsonify({})
+
+@views.errorhandler(413)
+def request_entity_too_large(error):
+    flash('File too large', category='error')
+    return(redirect(url_for('views.home')))
+   
